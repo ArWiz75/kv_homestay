@@ -24,6 +24,9 @@ class SettingController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'footer_text' => 'required|string',
+            'tiktok' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'facebook' => 'nullable|url',
         ]);
 
         foreach ($validated as $key => $value) {

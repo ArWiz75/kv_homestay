@@ -45,6 +45,7 @@ class RoomController extends Controller
         }
 
         $validated['is_popular'] = $request->has('is_popular');
+        $validated['is_available'] = $request->has('is_available');
 
         Room::create($validated);
 
@@ -84,6 +85,7 @@ class RoomController extends Controller
         }
 
         $validated['is_popular'] = $request->has('is_popular');
+        $validated['is_available'] = $request->has('is_available');
 
         $room->update($validated);
 

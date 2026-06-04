@@ -15,11 +15,13 @@ class Room extends Model
         'amenities',
         'image',
         'is_popular',
+        'is_available',
     ];
 
     protected $casts = [
         'amenities' => 'array',
         'is_popular' => 'boolean',
+        'is_available' => 'boolean',
     ];
 
     public function reservations()

@@ -2,13 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Mobile Navigation Toggle ---
     const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.getElementById('nav-links') || document.querySelector('.nav-links');
 
     if (mobileMenu && navLinks) {
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Animate hamburger to X (optional enhancement)
             mobileMenu.classList.toggle('is-active');
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('is-active');
+                document.body.style.overflow = '';
+            });
         });
     }
 
@@ -16,19 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            // Close mobile menu if open
-            if (navLinks && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
 
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Adjust for navbar height
-                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const navHeight = document.querySelector('.navbar')?.offsetHeight || 70;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 
                 window.scrollTo({
@@ -39,39 +43,111 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Navbar Background on Scroll ---
+    // --- Navbar Scroll Effect (Transparent → Solid) ---
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
-            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-        } else {
-            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.04)';
-            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        }
-    });
+    if (navbar) {
+        const updateNavbar = () => {
+            if (window.scrollY > 80) {
+                navbar.classList.remove('navbar--transparent');
+                navbar.classList.add('navbar--solid');
+            } else {
+                navbar.classList.add('navbar--transparent');
+                navbar.classList.remove('navbar--solid');
+            }
+        };
+        
+        // Initial check
+        updateNavbar();
+        
+        // Throttled scroll listener
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateNavbar();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
 
-    // --- Intersection Observer for Fade-in Animations ---
-    const fadeElements = document.querySelectorAll('.fade-in');
+    // --- Counter Animation ---
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stat-number[data-target]');
+        
+        counters.forEach(counter => {
+            if (counter.dataset.animated) return;
+            
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // ms
+            const startTime = performance.now();
+            
+            const updateCounter = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease-out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                
+                counter.textContent = current + (target >= 100 ? '+' : '+');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target + '+';
+                    counter.dataset.animated = 'true';
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
+        });
+    };
+
+    // --- Intersection Observer for All Animations ---
+    const animElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
     
     const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -40px 0px"
     };
 
     const appearOnScroll = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
-                entry.target.classList.add('appear');
-                observer.unobserve(entry.target);
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add('appear');
+            
+            // Check if this is a stat section — trigger counter
+            if (entry.target.closest('.stats-section') || entry.target.classList.contains('stat-item')) {
+                animateCounters();
             }
+            
+            observer.unobserve(entry.target);
         });
     }, appearOptions);
 
-    fadeElements.forEach(el => {
+    animElements.forEach(el => {
         appearOnScroll.observe(el);
     });
+
+    // --- Parallax Effect on Hero Image ---
+    const heroImage = document.querySelector('.hero-image');
+    if (heroImage) {
+        let parallaxTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!parallaxTicking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.scrollY;
+                    if (scrolled < window.innerHeight) {
+                        heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    }
+                    parallaxTicking = false;
+                });
+                parallaxTicking = true;
+            }
+        });
+    }
 
 });

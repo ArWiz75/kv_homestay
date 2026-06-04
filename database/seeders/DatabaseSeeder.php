@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin KV',
             'email' => 'admin@kvhomestay.com',
-            'password' => bcrypt('password123'),
+            'password' => bcrypt('password'),
         ]);
 
         // Seed Sample Rooms
