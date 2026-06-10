@@ -17,7 +17,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                         </div>
                         <div class="admin-stat-info">
-                            <h3>{{ \App\Models\Room::count() ?? 0 }}</h3>
+                            <h3>{{ $totalRooms }}</h3>
                             <p>Total Kamar</p>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         </div>
                         <div class="admin-stat-info">
-                            <h3>{{ \App\Models\Room::where('is_popular', true)->count() ?? 0 }}</h3>
+                            <h3>{{ $popularRooms }}</h3>
                             <p>Kamar Populer</p>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                         </div>
                         <div class="admin-stat-info">
-                            <h3>{{ \App\Models\Room::where('is_available', true)->count() ?? 0 }} / {{ \App\Models\Room::count() }}</h3>
+                            <h3>{{ $availableRooms }} / {{ $totalRooms }}</h3>
                             <p>Kamar Tersedia</p>
                         </div>
                     </div>

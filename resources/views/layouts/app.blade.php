@@ -394,19 +394,34 @@
                 font-weight: 600;
             }
 
-            /* --- Alert / Success Message --- */
+            /* --- Alert / Success Message (Floating Toast) --- */
             .admin-alert-success {
+                position: fixed;
+                top: 24px;
+                right: 24px;
+                z-index: 9999;
                 background: #dcfce7;
                 border: 1px solid #86efac;
                 color: #166534;
-                padding: 0.8rem 1.2rem;
+                padding: 1rem 1.5rem;
                 border-radius: var(--admin-radius);
-                font-size: 0.9rem;
-                font-weight: 500;
-                margin-bottom: 1.2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 display: flex;
                 align-items: center;
-                gap: 0.5rem;
+                gap: 0.7rem;
+                animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+
+            @keyframes slideInRight {
+                from { transform: translateX(120%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes fadeOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(120%); opacity: 0; }
             }
 
             /* --- Image Thumbnail --- */
@@ -618,8 +633,28 @@
 
             <!-- Page Content -->
             <main style="padding-bottom: 2rem;">
+                @if(session('success'))
+                    <div class="admin-alert-success" id="admin-toast-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Toast Animation Script -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const toast = document.getElementById('admin-toast-success');
+                if (toast) {
+                    setTimeout(() => {
+                        toast.style.animation = 'fadeOutRight 0.4s ease-in forwards';
+                        setTimeout(() => toast.remove(), 400);
+                    }, 3500); // Tampil selama 3.5 detik
+                }
+            });
+        </script>
     </body>
 </html>

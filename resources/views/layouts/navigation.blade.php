@@ -41,9 +41,13 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center gap-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-lg text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div style="width: 30px; height: 30px; background: var(--admin-primary-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--admin-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            </div>
+                            @if(Auth::user()->avatar)
+                                <img src="{{ asset(Auth::user()->avatar) }}" alt="Profile" style="width: 30px; height: 30px; border-radius: 8px; object-fit: cover; border: 1px solid var(--admin-border);">
+                            @else
+                                <div style="width: 30px; height: 30px; background: var(--admin-primary-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--admin-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </div>
+                            @endif
                             <div>{{ Auth::user()->name }}</div>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -105,9 +109,13 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-3 border-t" style="border-color: var(--admin-border-light);">
             <div class="px-4 flex items-center gap-3">
-                <div style="width: 36px; height: 36px; background: var(--admin-primary-ultra-light); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--admin-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
+                @if(Auth::user()->avatar)
+                    <img src="{{ asset(Auth::user()->avatar) }}" alt="Profile" style="width: 36px; height: 36px; border-radius: 10px; object-fit: cover; border: 1px solid var(--admin-border);">
+                @else
+                    <div style="width: 36px; height: 36px; background: var(--admin-primary-ultra-light); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--admin-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                @endif
                 <div>
                     <div class="font-semibold text-sm" style="color: var(--admin-text);">{{ Auth::user()->name }}</div>
                     <div class="text-xs" style="color: var(--admin-text-muted);">{{ Auth::user()->email }}</div>

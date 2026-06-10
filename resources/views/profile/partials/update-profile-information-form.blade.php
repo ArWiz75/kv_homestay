@@ -13,9 +13,29 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="avatar" :value="__('Profile Picture')" />
+            @if ($user->avatar)
+                <div class="mt-2 mb-4">
+                    <img src="{{ asset($user->avatar) }}" alt="Profile Picture" class="rounded-full object-cover" style="width: 80px; height: 80px; border: 2px solid var(--admin-primary-light);">
+                </div>
+            @else
+                <div class="mt-2 mb-4 rounded-full" style="width: 80px; height: 80px; background: var(--admin-primary-ultra-light); display: flex; align-items: center; justify-content: center; border: 2px dashed var(--admin-primary-light);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--admin-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+            @endif
+            <input id="avatar" name="avatar" type="file" class="mt-1 block w-full text-sm text-gray-500
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-md file:border-0
+              file:text-sm file:font-semibold
+              file:bg-green-50 file:text-green-700
+              hover:file:bg-green-100" accept="image/*" />
+            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

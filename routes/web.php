@@ -7,15 +7,14 @@ use App\Models\Room;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $rooms = Room::all();
-    $settings = Setting::all()->pluck('value', 'key');
-    return view('welcome', compact('rooms', 'settings'));
-})->name('welcome');
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DashboardController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
