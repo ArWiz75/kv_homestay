@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
 
-Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::get('/', [HomeController::class, 'landing'])->name('landing');
+Route::get('/old-home', [HomeController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

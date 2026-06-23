@@ -47,13 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar');
     if (navbar) {
         const updateNavbar = () => {
-            if (window.scrollY > 80) {
-                navbar.classList.remove('navbar--transparent');
-                navbar.classList.add('navbar--solid');
-            } else {
-                navbar.classList.add('navbar--transparent');
-                navbar.classList.remove('navbar--solid');
-            }
+            navbar.classList.remove('navbar--transparent');
+            navbar.classList.add('navbar--solid');
         };
         
         // Initial check

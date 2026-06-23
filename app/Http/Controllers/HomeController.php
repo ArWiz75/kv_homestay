@@ -18,4 +18,15 @@ class HomeController extends Controller
         
         return view('welcome', compact('rooms', 'settings'));
     }
+
+    /**
+     * Show the compact modern landing page.
+     */
+    public function landing()
+    {
+        $rooms = Room::all();
+        $settings = Setting::all()->pluck('value', 'key');
+
+        return view('landing', compact('rooms', 'settings'));
+    }
 }

@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}">
 </head>
 <body>
     @php
@@ -23,10 +23,9 @@
     @endphp
 
     @include('partials.home.navbar')
-    @include('partials.home.hero')
+    @include('partials.home.rooms')
     @include('partials.home.stats')
     @include('partials.home.about')
-    @include('partials.home.rooms')
     @include('partials.home.footer')
 
     <!-- WhatsApp Floating Button -->

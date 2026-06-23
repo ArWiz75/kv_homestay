@@ -1,9 +1,9 @@
     <!-- Room Catalog Section -->
-    <section id="rooms" class="rooms section bg-light">
+    <section id="rooms" class="rooms section bg-light" style="padding-top: 6rem; padding-bottom: 3rem;">
         <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Pilihan Kamar</h2>
-                <p class="section-subtitle">Temukan ruangan yang paling sesuai dengan kebutuhan istirahat Anda.</p>
+            <div class="section-header fade-in" style="text-align: left; margin-bottom: 2rem;">
+                <h2 class="section-title" style="font-size: 3.5rem; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1.1;">Temukan<br><span style="color: var(--clr-primary);">Kamar Impian.</span></h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; margin-left: 0; max-width: 600px; color: var(--clr-text-secondary);">Kenyamanan tak tertandingi dengan desain yang memanjakan mata. Pesan sekarang dan rasakan perbedaannya.</p>
             </div>
 
             <div class="room-grid">
