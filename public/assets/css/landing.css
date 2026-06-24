@@ -1151,7 +1151,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     /* Nav mobile */
     .lp-nav__links {
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        height: 100dvh;
         background: rgba(255, 255, 255, 0.97);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);

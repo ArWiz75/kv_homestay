@@ -58,6 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
             about_desc: 'KV Homestay dirancang untuk memberikan pengalaman menginap yang tak terlupakan. Dengan lokasi strategis dan suasana alam yang asri, kami menjamin kenyamanan terbaik untuk setiap tamu.',
             about_btn_wa: 'Hubungi via WhatsApp',
 
+            // Reviews
+            reviews_label: 'Testimoni',
+            reviews_title_prefix: 'Kata',
+            reviews_title_highlight: 'Mereka.',
+            reviews_empty: 'Belum ada ulasan saat ini. Jadilah yang pertama!',
+            review_btn_write: 'Tulis Ulasan Anda',
+            review_modal_title: 'Bagikan Pengalaman Anda',
+            review_modal_name: 'Nama Anda',
+            review_modal_rating: 'Penilaian (1-5 Bintang)',
+            review_modal_comment: 'Ulasan Anda',
+            review_modal_submit: 'Kirim Ulasan',
+            review_rating_5: '5 Bintang - Luar Biasa',
+            review_rating_4: '4 Bintang - Sangat Bagus',
+            review_rating_3: '3 Bintang - Bagus',
+            review_rating_2: '2 Bintang - Cukup',
+            review_rating_1: '1 Bintang - Kurang',
+
             // Footer
             footer_desc: 'Menyediakan pengalaman menginap dengan kenyamanan seperti di rumah sendiri.',
             footer_contact: 'Kontak',
@@ -120,6 +137,23 @@ document.addEventListener('DOMContentLoaded', () => {
             about_title_highlight: 'Us',
             about_desc: 'KV Homestay is designed to provide an unforgettable stay experience. With a strategic location and lush natural surroundings, we guarantee the best comfort for every guest.',
             about_btn_wa: 'Contact via WhatsApp',
+
+            // Reviews
+            reviews_label: 'Testimonials',
+            reviews_title_prefix: 'What They',
+            reviews_title_highlight: 'Say.',
+            reviews_empty: 'No reviews yet. Be the first!',
+            review_btn_write: 'Write a Review',
+            review_modal_title: 'Share Your Experience',
+            review_modal_name: 'Your Name',
+            review_modal_rating: 'Rating (1-5 Stars)',
+            review_modal_comment: 'Your Review',
+            review_modal_submit: 'Submit Review',
+            review_rating_5: '5 Stars - Excellent',
+            review_rating_4: '4 Stars - Very Good',
+            review_rating_3: '3 Stars - Good',
+            review_rating_2: '2 Stars - Fair',
+            review_rating_1: '1 Star - Poor',
 
             // Footer
             footer_desc: 'Providing a stay experience with the comfort of being at home.',

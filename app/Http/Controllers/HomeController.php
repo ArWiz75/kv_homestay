@@ -26,7 +26,8 @@ class HomeController extends Controller
     {
         $rooms = Room::all();
         $settings = Setting::all()->pluck('value', 'key');
+        $reviews = \App\Models\Review::where('is_approved', true)->latest()->take(6)->get();
 
-        return view('landing', compact('rooms', 'settings'));
+        return view('landing', compact('rooms', 'settings', 'reviews'));
     }
 }
